@@ -1,4 +1,5 @@
-document.getElementById('error-message').style.display = 'none';
+document.getElementById('error-message1').style.display = 'none';
+document.getElementById('error-message2').style.display = 'none';
 document.getElementById('spinner').style.display = 'none';
 
 const searchInput = document.getElementById('search-input').addEventListener('click', function() {
@@ -10,12 +11,14 @@ const searchInput = document.getElementById('search-input').addEventListener('cl
 
     if (searchText === '') {
         // please write something to display
-        displayError();
+        displayError1();
     } else {
         // Display Spinner
         document.getElementById('spinner').style.display = 'block';
-        // Hide error
-        document.getElementById('error-message').style.display = 'none';
+        // Hide error-messase-1
+        document.getElementById('error-message1').style.display = 'none';
+        // Hide error-messase-1
+        document.getElementById('error-message2').style.display = 'none';
         // Clear Search Result
         document.getElementById('searchbook-result').textContent = '';
         //clear prievious Book numbers
@@ -31,8 +34,16 @@ const searchInput = document.getElementById('search-input').addEventListener('cl
 
 });
 
-const displayError = () => {
-    document.getElementById('error-message').style.display = 'block';
+const displayError1 = () => {
+    document.getElementById('error-message1').style.display = 'block';
+    document.getElementById('error-message2').style.display = 'none';
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('book-numbers').textContent = '';
+
+}
+const displayError2 = () => {
+    document.getElementById('error-message1').style.display = 'none';
+    document.getElementById('error-message2').style.display = 'block';
     document.getElementById('spinner').style.display = 'none';
     document.getElementById('book-numbers').textContent = '';
 
@@ -41,23 +52,20 @@ const displayError = () => {
 /* Display Search Result */
 const displaySearchResult = books => {
     document.getElementById('book-numbers').textContent = `Book Found ${books.numFound}`;
-    // clear team previous team number
-    // document.getlementById('book-numbers').textContent = '';
 
     //clear previous search result
     const searchResult = document.getElementById('searchbook-result');
     searchResult.textContent = '';
     // console.log(books);
     if (books.docs.length === 0) {
-        displayError();
+        displayError2();
     } else {
-        document.getElementById('error-message').style.display = 'none';
+        document.getElementById('error-message2').style.display = 'none';
         document.getElementById('spinner').style.display = 'none';
 
         /* use for each loop
          Retrieve each book and display in a card */
         books.docs.forEach(book => {
-            // document.getElementById('book-numbers').textContent = `Book Found ${books.length}`;
 
             const divContainer = document.createElement('div');
             divContainer.classList.add('col');
