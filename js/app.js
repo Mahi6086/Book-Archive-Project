@@ -34,6 +34,7 @@ const searchInput = document.getElementById('search-input').addEventListener('cl
 
 });
 
+//Display error-message-1
 const displayError1 = () => {
     document.getElementById('error-message1').style.display = 'block';
     document.getElementById('error-message2').style.display = 'none';
@@ -41,6 +42,8 @@ const displayError1 = () => {
     document.getElementById('book-numbers').textContent = '';
 
 }
+
+//Display error-message-2
 const displayError2 = () => {
     document.getElementById('error-message1').style.display = 'none';
     document.getElementById('error-message2').style.display = 'block';
@@ -68,16 +71,16 @@ const displaySearchResult = books => {
         books.docs.forEach(book => {
 
             const divContainer = document.createElement('div');
-            divContainer.classList.add('col');
+            divContainer.classList.add('rounded-3');
 
             divContainer.innerHTML = `
-        <div class="card h-100">
+        <div class="card h-100 border border-5 border-info bg-info">
             <img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top h-75" alt="...">
             <div class="card-body">
-                <h3 class="">Books-Name: ${book.title}</h3>
-                <h4 class="">Author: ${book.author_name}</h4>
-                <h5 class="">First-Publish-Year: ${book.first_publish_year}</h5>
-                <h5 class="">Publisher: ${book.publisher}</h5>
+                <h3 class=""><span class="text-danger fw-bold">Books-Name:</span> ${book.title}</h3>
+                <h4 class=""><span class="text-danger fw-bold">Author:</span> ${book.author_name}</h4>
+                <h5 class=""><span class="text-danger fw-bold">First-Publish-Year:</span> ${book.first_publish_year}</h5>
+                <h5 class=""><span class="text-danger fw-bold">Publisher:</span> ${book.publisher[0]}</h5>
             </div>
         </div>
         `
