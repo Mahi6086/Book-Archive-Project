@@ -26,7 +26,7 @@ const searchInput = document.getElementById('search-input').addEventListener('cl
         // console.log(url);
         fetch(url)
             .then(res => res.json())
-            .then(data => displaySearchResult(data.docs));
+            .then(data => displaySearchResult(data));
     }
 
 });
@@ -40,6 +40,7 @@ const displayError = () => {
 
 /* Display Search Result */
 const displaySearchResult = books => {
+    document.getElementById('book-numbers').textContent = `Book Found ${books.numFound}`;
     // clear team previous team number
     // document.getlementById('book-numbers').textContent = '';
 
@@ -47,7 +48,7 @@ const displaySearchResult = books => {
     const searchResult = document.getElementById('searchbook-result');
     searchResult.textContent = '';
     // console.log(books);
-    if (books.length === 0) {
+    if (books.docs.length === 0) {
         displayError();
     } else {
         document.getElementById('error-message').style.display = 'none';
@@ -55,15 +56,15 @@ const displaySearchResult = books => {
 
         /* use for each loop
          Retrieve each book and display in a card */
-        books.forEach(book => {
-            document.getElementById('book-numbers').textContent = `Book Found ${books.length}`;
+        books.docs.forEach(book => {
+            // document.getElementById('book-numbers').textContent = `Book Found ${books.length}`;
 
             const divContainer = document.createElement('div');
             divContainer.classList.add('col');
 
             divContainer.innerHTML = `
         <div class="card h-100">
-            <img class="h-75" src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top h-75" alt="...">
+            <img src="https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg" class="card-img-top h-75" alt="...">
             <div class="card-body">
                 <h3 class="">Books-Name: ${book.title}</h3>
                 <h4 class="">Author: ${book.author_name}</h4>
